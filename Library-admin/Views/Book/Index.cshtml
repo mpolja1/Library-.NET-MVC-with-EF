@@ -1,16 +1,14 @@
 ﻿@model IEnumerable<DAL.DBContext.Book>
 
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
 
 
-@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+<h2>Knjige</h2>
 
 
-<table class="table table-responsive">
+@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary bg-danger" })
+
+
+<table class="table table-responsive" style="margin-top:10px">
     <tr>
         <th>
             Naslov
