@@ -5,35 +5,35 @@
 <h2>Knjige</h2>
 
 
-@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary bg-danger" })
+@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
 
 
-<table class="table table-responsive" style="margin-top:10px">
-    <tr>
-        <th>
-            Naslov
-        </th>
+<table class="table-striped  table-responsive" style="margin-top:10px">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                Naslov
+            </th>
 
-        <th>
-            <strong>Autor</strong>
-        </th>
-        <th>
-            Izdavac
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ISBN)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BuyPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BorrowPrice)
-        </th>
+            <th>
+                <strong>Autor</strong>
+            </th>
+            <th>
+                Izdavac
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ISBN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuyPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BorrowPrice)
+            </th>
 
-
-
-        <th class="text-center" style="width:200px;">Akcija</th>
-    </tr>
+            <th class="text-center" style="width:200px;">Akcija</th>
+        </tr>
+    </thead>
 
     @foreach (var item in Model)
     {
@@ -57,13 +57,13 @@
                 @Html.DisplayFor(modelItem => item.BorrowPrice)
             </td>
 
-        <td>
-            <a href="#" class="btn btn-danger" onclick="ConfirmDelete(@item.BookId)">Delete </a>
-            @Html.ActionLink("Edit", "Edit", new { id = item.BookId }, new { @class = "btn btn-primary" })
-            @Html.ActionLink("Hide", "Hide", new { id = item.BookId }, new { @class = "btn bg-warning" })
+            <td>
+                <a href="#" class="btn btn-danger" onclick="ConfirmDelete(@item.BookId)">Delete </a>
+                @Html.ActionLink("Edit", "Edit", new { id = item.BookId }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Hide", "Hide", new { id = item.BookId }, new { @class = "btn bg-warning" })
 
-        </td>
-    </tr>
+            </td>
+        </tr>
     }
 
 </table>
@@ -71,7 +71,7 @@
 <div class="modal fade" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-danger">
                 <a href="#" class="close" data-dismiss="modal">&times;</a>
                 <h3 class="modal-title">Delete Book</h3>
             </div>
@@ -94,8 +94,6 @@
 
 </div>
 <input type="hidden" id="hiddenBookId" />
-
-
 
 @section scripts{
     <script>
