@@ -98,9 +98,25 @@ namespace Library_admin.Controllers
             return View(book);
         }
 
-        
+        public JsonResult DeleteBook(int BookId)
+        {
 
-        
+            bool result = false;
+            Book book = db.Book.Find(BookId);
+
+            if (book != null)
+            {
+                db.Book.Remove(book);
+                db.SaveChanges();
+
+                result = true;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
+
 
         protected override void Dispose(bool disposing)
         {
