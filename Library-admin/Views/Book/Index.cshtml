@@ -39,33 +39,96 @@
 
     @foreach (var item in Model)
     {
-        <tr id="row_@item.BookId">
-            <td width="20%">
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Publisher.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ISBN)
-            </td>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.BuyPrice)
-            </td>
-            <td class="text-center">
-                @Html.DisplayFor(modelItem => item.BorrowPrice)
-            </td>
+    <tr id="row_@item.BookId">
+        <td width="20%">
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Author.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Publisher.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ISBN)
+        </td>
+        <td class="text-center">
+            @Html.DisplayFor(modelItem => item.BuyPrice)
+        </td>
+        <td class="text-center">
+            @Html.DisplayFor(modelItem => item.BorrowPrice)
+        </td>
 
-            <td>
-                <a href="#" class="btn btn-danger" onclick="ConfirmDelete(@item.BookId)">Delete </a>
-                @Html.ActionLink("Edit", "Edit", new { id = item.BookId }, new { @class = "btn btn-primary" })
-                @Html.ActionLink("Hide", "Hide", new { id = item.BookId }, new { @class = "btn bg-warning" })
+        <td>
+            <a href="#" class="btn btn-danger" onclick="ConfirmDelete(@item.BookId)">Delete </a>
+            @Html.ActionLink("Edit", "Edit", new { id = item.BookId }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Hide", "Hide", new { id = item.BookId }, new { @class = "btn bg-warning" })
 
-            </td>
-        </tr>
+        </td>
+    </tr>
     }
 
 </table>
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 class="modal-title">Delete Book</h3>
+            </div>
+            <div class="modal-body">
+                <h4>Are you sure you want to Remove this Book?</h4>
+
+                <div style="text-align:center; display:none" id="loaderDiv">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/28/InternetSlowdown_Day.gif#" width="100" alt="Alternate Text" />
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                <a href="#" class="btn btn-success" onclick="DeleteBook()">Confirm</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<input type="hidden" id="hiddenBookId" />
+
+
+
+@section scripts{
+    <script>
+
+        var ConfirmDelete = function (BookId) {
+
+            $("#hiddenBookId").val(BookId);
+            $("#myModal").modal('show');
+
+        }
+
+        var DeleteBook = function () {
+
+            var idbook = $("#hiddenBookId").val();
+
+            $.ajax({
+
+                type: "POST",
+                url: "/Book/DeleteBook",
+                data: { BookId: idbook },
+                success: function (result) {
+
+                    $("#myModal").modal("hide");
+                    $("#row_" + idbook).remove();
+
+                }
+
+            })
+
+        }
+
+    </script>
+
+}

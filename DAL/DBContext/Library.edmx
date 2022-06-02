@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="KnjiznicaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="KnjiznicaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Author">
           <Key>
             <PropertyRef Name="AuthorId" />
@@ -33,6 +33,7 @@
           <Property Name="Condition" Type="bit" Nullable="false" />
           <Property Name="PublisherId" Type="int" />
           <Property Name="SoldNumber" Type="int" />
+          <Property Name="DeletedAt" Type="smalldatetime" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -228,8 +229,7 @@
             <End Role="Book" EntitySet="Book" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="KnjiznicaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -266,6 +266,7 @@
           <NavigationProperty Name="Publisher" Relationship="Self.FK__Book__PublisherI__2739D489" FromRole="Book" ToRole="Publisher" />
           <NavigationProperty Name="LoanHistory" Relationship="Self.FK__LoanHisto__BookI__30C33EC3" FromRole="Book" ToRole="LoanHistory" />
           <NavigationProperty Name="PurchasedHistory" Relationship="Self.FK__Purchased__BookI__2CF2ADDF" FromRole="Book" ToRole="PurchasedHistory" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -490,6 +491,7 @@
           <EntitySetMapping Name="Book">
             <EntityTypeMapping TypeName="KnjiznicaModel.Book">
               <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
                 <ScalarProperty Name="BookId" ColumnName="BookId" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
