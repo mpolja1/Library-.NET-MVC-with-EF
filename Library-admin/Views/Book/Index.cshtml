@@ -37,25 +37,25 @@
 
     @foreach (var item in Model)
     {
-    <tr id="row_@item.BookId">
-        <td width="20%">
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Publisher.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ISBN)
-        </td>
-        <td class="text-center">
-            @Html.DisplayFor(modelItem => item.BuyPrice)
-        </td>
-        <td class="text-center">
-            @Html.DisplayFor(modelItem => item.BorrowPrice)
-        </td>
+        <tr id="row_@item.BookId">
+            <td width="20%">
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Publisher.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.BuyPrice)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.BorrowPrice)
+            </td>
 
         <td>
             <a href="#" class="btn btn-danger" onclick="ConfirmDelete(@item.BookId)">Delete </a>
