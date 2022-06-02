@@ -65,5 +65,14 @@ namespace DAL.DBContext
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SaveEmployee", firstNameParameter, lastNameParameter, usernameParameter, passwordParameter, emailParameter, telephoneParameter);
         }
+    
+        public virtual int HideBook(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("HideBook", idParameter);
+        }
     }
 }

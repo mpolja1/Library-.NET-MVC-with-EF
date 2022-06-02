@@ -17,7 +17,7 @@ namespace Library_admin.Controllers
         // GET: Book
         public ActionResult Index()
         {
-            var book = db.Book.Include(b => b.Author).Include(b => b.Publisher).Where(x=>x.DeletedAt==null);
+            var book = db.Book.Include(b => b.Author).Include(b => b.Publisher).Where(x => x.DeletedAt == null);
             return View(book.ToList());
         }
 
@@ -114,8 +114,16 @@ namespace Library_admin.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult Hide(int? id)
+        {
+            if (id != null)
+            {
+                db.HideBook(id);
+            }
 
 
+            return RedirectToAction("Index");
+        }
 
 
         protected override void Dispose(bool disposing)

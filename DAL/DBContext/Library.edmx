@@ -186,6 +186,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="HideBook" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
         <Function Name="SaveEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
           <Parameter Name="LastName" Type="nvarchar" Mode="In" />
@@ -468,6 +471,9 @@
             <Parameter Name="Email" Mode="In" Type="String" />
             <Parameter Name="Telephone" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="HideBook">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -592,6 +598,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SaveEmployee" FunctionName="KnjiznicaModel.Store.SaveEmployee" />
+          <FunctionImportMapping FunctionImportName="HideBook" FunctionName="KnjiznicaModel.Store.HideBook" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
