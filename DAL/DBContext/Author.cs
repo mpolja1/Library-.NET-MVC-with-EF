@@ -11,7 +11,7 @@ namespace DAL.DBContext
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Author
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,15 +19,20 @@ namespace DAL.DBContext
         {
             this.Book = new HashSet<Book>();
         }
-    
+
         public int AuthorId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string FullName
+        {
+            get
+            { return FirstName + " " + LastName; }
+        }
         public string ImagePath { get; set; }
         public System.DateTime DateOfBirth { get; set; }
         public string Biography { get; set; }
         public string Link { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Book> Book { get; set; }
     }

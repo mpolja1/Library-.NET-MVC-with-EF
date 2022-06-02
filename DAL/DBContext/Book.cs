@@ -33,6 +33,7 @@ namespace DAL.DBContext
         public bool Condition { get; set; }
         public Nullable<int> PublisherId { get; set; }
         public Nullable<int> SoldNumber { get; set; }
+        public Nullable<System.DateTime> DeletedAt { get; set; }
     
         public virtual Author Author { get; set; }
         public virtual Publisher Publisher { get; set; }
