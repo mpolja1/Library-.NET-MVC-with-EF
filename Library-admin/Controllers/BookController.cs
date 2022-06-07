@@ -16,8 +16,11 @@ namespace Library_admin.Controllers
         private KnjiznicaEntities db = new KnjiznicaEntities();
 
         // GET: Book
+
+       
         public async Task<ActionResult> Index()
         {
+            ViewBag.Poruka = "Zelite li obrisatiiiii";
             var book = db.Book.Where(x => x.DeletedAt == null);
             return View(await book.ToListAsync());
         }
@@ -105,7 +108,7 @@ namespace Library_admin.Controllers
 
             bool result = false;
             Book book = db.Book.Find(BookId);
-
+            
             if (book != null)
             {
                 db.Book.Remove(book);
