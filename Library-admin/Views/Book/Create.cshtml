@@ -25,10 +25,11 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.AuthorId, "Author", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-3">
                 @Html.DropDownList("AuthorId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.AuthorId, "", new { @class = "text-danger" })
             </div>
+            @Html.ActionLink("Add Author", "AddAuthor",null,htmlAttributes: new {@class="btn btn-primary"})
         </div>
 
         <div class="form-group">
@@ -90,11 +91,12 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PublisherId, "Izdavac", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.PublisherId, "Publisher", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
                 @Html.DropDownList("PublisherId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.PublisherId, "", new { @class = "text-danger" })
             </div>
+            @Html.ActionLink("Add Publisher", "AddPublisher", null, htmlAttributes: new { @class = "btn btn-primary" })
         </div>
      <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

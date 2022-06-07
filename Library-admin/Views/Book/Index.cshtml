@@ -3,16 +3,19 @@
 
 
 <h2>Knjige</h2>
+<head>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
 
+</head>
 
 @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
 
 
-<table class="table-striped  table-responsive" style="margin-top:10px">
+<table class="table-striped  table-responsive" style="margin-top:10px" id="tableBook">
     <thead class="thead-dark">
         <tr>
             <th>
-                Naslov
+                Title
             </th>
 
             <th>
@@ -97,34 +100,38 @@
 
 @section scripts{
     <script>
+        $(document).ready(function () {
+            $('#tableBook').DataTable();
+       
+            var ConfirmDelete = function (BookId) {
 
-        var ConfirmDelete = function (BookId) {
+                $("#hiddenBookId").val(BookId);
+                $("#myModal").modal('show');
 
-            $("#hiddenBookId").val(BookId);
-            $("#myModal").modal('show');
+            }
+        
+            var DeleteBook = function () {
 
-        }
+                var idbook = $("#hiddenBookId").val();
 
-        var DeleteBook = function () {
+                $.ajax({
 
-            var idbook = $("#hiddenBookId").val();
+                    type: "POST",
+                    url: "/Book/DeleteBook",
+                    data: { BookId: idbook },
+                    success: function (result) {
 
-            $.ajax({
+                        $("#myModal").modal("hide");
+                        $("#row_" + idbook).remove();
 
-                type: "POST",
-                url: "/Book/DeleteBook",
-                data: { BookId: idbook },
-                success: function (result) {
+                    }
 
-                    $("#myModal").modal("hide");
-                    $("#row_" + idbook).remove();
+                })
 
-                }
-
-            })
-
-        }
-
+            }
+        });
     </script>
 
 }
+
+

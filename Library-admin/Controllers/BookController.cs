@@ -77,6 +77,7 @@ namespace Library_admin.Controllers
             }
             ViewBag.AuthorId = new SelectList(db.Author, "AuthorId", "FirstName", book.AuthorId);
             ViewBag.PublisherId = new SelectList(db.Publisher, "Id", "Name", book.PublisherId);
+           
             return View(book);
         }
 
@@ -123,6 +124,50 @@ namespace Library_admin.Controllers
 
 
             return RedirectToAction("Index");
+        }
+
+       [HttpGet]
+        public ActionResult AddAuthor()
+        {
+          
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddAuthor(Author author)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Author.Add(author);
+                db.SaveChanges();
+
+                return RedirectToAction("Create");
+            }
+            
+
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult AddPublisher()
+        {
+            
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddPublisher(Publisher publisher)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Publisher.Add(publisher);
+                db.SaveChanges();
+
+                return RedirectToAction("Create");
+            }
+
+            return View();
         }
 
 
