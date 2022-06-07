@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using DAL.DBContext;
@@ -15,10 +16,10 @@ namespace Library_admin.Controllers
         private KnjiznicaEntities db = new KnjiznicaEntities();
 
         // GET: Book
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var book = db.Book.Include(b => b.Author).Include(b => b.Publisher).Where(x => x.DeletedAt == null);
-            return View(book.ToList());
+            var book = db.Book.Where(x => x.DeletedAt == null);
+            return View(await book.ToListAsync());
         }
 
         // GET: Book/Details/5
