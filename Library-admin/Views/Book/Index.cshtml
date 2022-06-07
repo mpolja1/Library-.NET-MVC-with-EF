@@ -8,10 +8,10 @@
 
 </head>
 
-@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary",style="margin-bottom:10px;" })
 
 
-<table class="table-striped  table-responsive" style="margin-top:10px" id="tableBook">
+<table class="table table-responsive table-bordered" style="margin-top:10px;" id="tableBook">
     <thead class="thead-dark">
         <tr>
             <th>
@@ -63,7 +63,7 @@
             <td>
                 <a href="#" class="btn btn-danger" onclick="ConfirmDelete(@item.BookId)">Delete </a>
                 @Html.ActionLink("Edit", "Edit", new { id = item.BookId }, new { @class = "btn btn-primary" })
-                @Html.ActionLink("Hide", "Hide", new { id = item.BookId }, new { @class = "btn bg-warning" })
+                @Html.ActionLink("Hide", "Hide", new { id = item.BookId }, new { @class = "btn bg-warning", onclick="return confirm('Are you sure whant to hide book?');" })
 
             </td>
         </tr>
@@ -108,7 +108,8 @@
                 $("#hiddenBookId").val(BookId);
                 $("#myModal").modal('show');
 
-            }
+        }
+       
         
             var DeleteBook = function () {
 
