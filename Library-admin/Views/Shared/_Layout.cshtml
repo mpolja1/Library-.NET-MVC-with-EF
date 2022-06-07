@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -20,7 +21,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Knjižara", actionName: "Index", controllerName: "Bookstore")</li>
+                    <li>@Html.ActionLink("Knjižara", actionName: "Edit", controllerName: "Library")</li>
                     <li>@Html.ActionLink("Knjige", actionName: "Index", controllerName: "Book")</li>
                     <li>@Html.ActionLink("Djelatnici", actionName: "Index", controllerName: "Employee")</li>
                 </ul>
@@ -36,7 +37,9 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application
+         
+            </p>
         </footer>
     </div>
 
