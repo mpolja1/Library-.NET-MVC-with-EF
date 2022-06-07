@@ -37,30 +37,30 @@ namespace DAL.DBContext
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<UserAsp> UserAsp { get; set; }
     
-        public virtual int SaveEmployee(string firstName, string lastName, string username, string password, string email, string telephone)
+        public virtual int SaveEmployee(Employee employee)
         {
-            var firstNameParameter = firstName != null ?
-                new ObjectParameter("FirstName", firstName) :
+            var firstNameParameter =employee.FristName  != null ?
+                new ObjectParameter("FirstName", employee.FristName) :
                 new ObjectParameter("FirstName", typeof(string));
     
-            var lastNameParameter = lastName != null ?
-                new ObjectParameter("LastName", lastName) :
+            var lastNameParameter = employee.LastName != null ?
+                new ObjectParameter("LastName", employee.LastName) :
                 new ObjectParameter("LastName", typeof(string));
     
-            var usernameParameter = username != null ?
-                new ObjectParameter("Username", username) :
+            var usernameParameter = employee.UserName != null ?
+                new ObjectParameter("Username", employee.UserName) :
                 new ObjectParameter("Username", typeof(string));
     
-            var passwordParameter = password != null ?
-                new ObjectParameter("Password", password) :
+            var passwordParameter = employee.Password != null ?
+                new ObjectParameter("Password", employee.Password) :
                 new ObjectParameter("Password", typeof(string));
     
-            var emailParameter = email != null ?
-                new ObjectParameter("Email", email) :
+            var emailParameter = employee.Email != null ?
+                new ObjectParameter("Email", employee.Email) :
                 new ObjectParameter("Email", typeof(string));
     
-            var telephoneParameter = telephone != null ?
-                new ObjectParameter("Telephone", telephone) :
+            var telephoneParameter = employee.Telephone != null ?
+                new ObjectParameter("Telephone", employee.Telephone) :
                 new ObjectParameter("Telephone", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SaveEmployee", firstNameParameter, lastNameParameter, usernameParameter, passwordParameter, emailParameter, telephoneParameter);
