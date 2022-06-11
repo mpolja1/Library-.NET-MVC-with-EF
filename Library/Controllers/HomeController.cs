@@ -9,7 +9,6 @@ namespace Library.Controllers
 {
     public class HomeController : Controller
     {
-        KnjiznicaEntities _dbcontext = new KnjiznicaEntities();
         public ActionResult Index()
         {
             return View();
@@ -27,12 +26,6 @@ namespace Library.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
-        }
-        public ActionResult Zaposlenici()
-        {
-            var zaposlenici = _dbcontext.Employee.ToList();
-
-            return View(zaposlenici);
         }
     }
 }
