@@ -121,12 +121,12 @@
                     url: "/Book/DeleteBook",
                     data: { BookId: idbook },
                     success: function (result) {
-
+                        
                         $("#myModal").modal("hide");
                         $("#row_" + idbook).remove();
-
+                        alert("obrisano");
                     }
-
+       
                 })
 
             }

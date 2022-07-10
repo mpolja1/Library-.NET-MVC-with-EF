@@ -8,16 +8,18 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using DAL.DBContext;
+using Library_admin.Models.CustomAttributes;
 
 namespace Library_admin.Controllers
 {
+    [IsAuthorized]
     public class BookController : Controller
     {
         private KnjiznicaEntities db = new KnjiznicaEntities();
 
-        // GET: Book
+      
 
-       
+        //[IsAuthorized]
         public async Task<ActionResult> Index()
         {
             ViewBag.Poruka = "Zelite li obrisatiiiii";
@@ -25,7 +27,6 @@ namespace Library_admin.Controllers
             return View(await book.ToListAsync());
         }
 
-        // GET: Book/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -40,7 +41,7 @@ namespace Library_admin.Controllers
             return View(book);
         }
 
-        // GET: Book/Create
+     
         public ActionResult Create()
         {
             ViewBag.AuthorId = new SelectList(db.Author, "AuthorId", "FirstName");
@@ -48,9 +49,7 @@ namespace Library_admin.Controllers
             return View();
         }
 
-        // POST: Book/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "BookId,Title,AuthorId,ISBN,BuyPrice,BorrowPrice,StockAvailabilty,CoverImage,Description,Condition,PublisherId,SoldNumber")] Book book)
@@ -67,7 +66,7 @@ namespace Library_admin.Controllers
             return View(book);
         }
 
-        // GET: Book/Edit/5
+   
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -85,9 +84,7 @@ namespace Library_admin.Controllers
             return View(book);
         }
 
-        // POST: Book/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+     
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "BookId,Title,AuthorId,ISBN,BuyPrice,BorrowPrice,StockAvailabilty,CoverImage,Description,Condition,PublisherId,SoldNumber")] Book book)

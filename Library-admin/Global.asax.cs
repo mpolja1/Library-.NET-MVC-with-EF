@@ -17,11 +17,11 @@ namespace Library_admin
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
-        protected void Application_Error()
-        {
-            string error = Server.GetLastError().GetBaseException().Message;
-            Response.Redirect("~/Error/Index?error="+error);
+        //protected void Application_Error()
+        //{
+        //    string error = Server.GetLastError().GetBaseException().Message;
+        //    Response.Redirect("~/Error/Index?error="+error);
 
-        }
+        //}
     }
 }

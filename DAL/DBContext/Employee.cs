@@ -23,8 +23,12 @@ namespace DAL.DBContext
         public Nullable<System.DateTime> DeletedAt { get; set; }
         public string UserName { get; set; }
 
+        [Required(ErrorMessage ="*")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        [Required(ErrorMessage ="*")]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         public string Telephone { get; set; }
     }
