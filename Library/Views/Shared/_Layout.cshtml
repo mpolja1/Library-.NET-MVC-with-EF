@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using DAL.DBContext
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,6 +7,9 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @{ 
+        UserAsp user = Session["User"] as UserAsp;
+    }
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -19,10 +23,21 @@
                 @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+                <ul class="nav navbar-nav navbar-right">
+                    @if (user != null)
+                    {
+                       
+                        <li>@Html.ActionLink(user.FirstName +" "+ user.FirstName, "UserAccount", controllerName: "Account")</li>
+                        <li>
+                            <button class="btn btn-danger" style="margin-top:10px;"> @Html.ActionLink("Logout", actionName: "Logout", controllerName: "Account")</button>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Registration", "Registration", controllerName: "Account")</li>
+                        <li>@Html.ActionLink("Login", "Login", controllerName: "Account")</li>
+                    }
                 </ul>
             </div>
         </div>

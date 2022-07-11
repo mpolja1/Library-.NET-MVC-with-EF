@@ -1,0 +1,19 @@
+﻿@using DAL.DBContext
+@model DAL.DBContext.Book 
+@{
+
+    ViewBag.Title = "Potvrda";
+    UserAsp user = Session["User"] as UserAsp;
+}
+
+<h2>Potvrda</h2>
+
+@if (user != null)
+{
+    <h3>Dobrodosli @user.FirstName + @user.LastName</h3>
+}
+
+
+<div>@Model.Title.ToString()</div>
+
+
