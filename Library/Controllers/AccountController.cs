@@ -23,11 +23,10 @@ namespace Library.Controllers
             var authUser = db.UserAsp.Where(x=> x.Email == user.Email && x.Password==user.Password).FirstOrDefault();
             if (authUser != null)
             {
-                if (ModelState.IsValid)
-                {
+
                     Session["User"] = authUser;
                     return RedirectToAction("Index",controllerName:"Book");
-                }
+                
             }
             else
             {
@@ -35,7 +34,12 @@ namespace Library.Controllers
             }
             return View();
         }
-       
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("index", "Book");
+        }
 
     }
 }
