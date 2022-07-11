@@ -1,6 +1,7 @@
 ﻿using DAL.DBContext;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -12,7 +13,9 @@ namespace Library.Controllers
     {
         private KnjiznicaEntities db = new KnjiznicaEntities();
 
+        //[ActionName("Edit")]
         [HttpGet]
+        
         public ActionResult Profile(int? id)
         {
             if (id == null)
@@ -25,6 +28,20 @@ namespace Library.Controllers
                 return HttpNotFound();
             }
 
+            return View(user);
+        }
+        //[ActionName("Edit")]
+        [HttpPost]
+        public ActionResult Profile(UserAsp user)
+        {
+           
+            if (ModelState.IsValid)
+            {
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction(actionName:"Index",controllerName:"Book");
+            }
+         
             return View(user);
         }
     }
