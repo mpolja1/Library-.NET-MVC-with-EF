@@ -44,7 +44,21 @@ namespace Library.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Registration(UserAsp user)
         {
-
+            if (ModelState.IsValid)
+            {
+                var email = db.UserAsp.Where(x => x.Email == user.Email).FirstOrDefault();
+                if (email==null)
+                {
+                    db.UserAsp.Add(user);
+                    db.SaveChanges();
+                    return RedirectToAction("Index", controllerName: "Book");
+                }
+                else
+                {
+                    ViewBag.EmailExists = "Email already exists";
+                }
+           
+            }
 
             return View();
         }

@@ -38,7 +38,7 @@ namespace DAL.DBContext
                 return FirstName + " " + LastName;
             }
         }
-        public string Address { get; set; }
+        public string Adress { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }
 

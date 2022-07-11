@@ -6,18 +6,26 @@
 
 <h2>Registration</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-   
+
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        
+
+        @if (ViewBag.EmailExists != null)
+        {
+    <div class="form-group">
+        <div class="alert alert-danger"style="font-weight:bold">
+            @ViewBag.EmailExists
+        </div>
+    </div>
+        }
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FirstName,labelText:"First name", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.FirstName, labelText: "First name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
@@ -25,7 +33,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.LastName,labelText:"Last name", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.LastName, labelText: "Last name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
@@ -33,10 +41,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Adress, labelText: "Address", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Adress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Adress, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -73,5 +81,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index",controllerName:"book")
+    @Html.ActionLink("Back to List", "Index", controllerName: "book")
 </div>
