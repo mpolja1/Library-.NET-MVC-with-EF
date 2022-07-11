@@ -25,7 +25,9 @@ namespace DAL.DBContext
 
         public int UserId { get; set; }
         public string CustomId { get; set; }
+        [Required]
         public string FirstName { get; set; }
+        [Required]
         public string LastName { get; set; }
 
         [NotMapped]
@@ -40,10 +42,10 @@ namespace DAL.DBContext
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="*")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-        [Required]
+        [Required(ErrorMessage ="*")]
         [MaxLength(16, ErrorMessage = "Maximum 16 characters"), MinLength(8, ErrorMessage = "Minimun 8 characters")]
         [DataType(DataType.Password)]
         public string Password { get; set; }

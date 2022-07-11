@@ -168,6 +168,7 @@
     <Content Include="Views\Book\Details.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Potvrda.cshtml" />
+    <Content Include="Views\Account\Registration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
