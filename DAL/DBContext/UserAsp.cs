@@ -11,7 +11,9 @@ namespace DAL.DBContext
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class UserAsp
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,18 +22,34 @@ namespace DAL.DBContext
             this.LoanHistory = new HashSet<LoanHistory>();
             this.PurchasedHistory = new HashSet<PurchasedHistory>();
         }
-    
+
         public int UserId { get; set; }
         public string CustomId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        [NotMapped]
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+        }
         public string Adress { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }
+
+        [Required]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+        [Required]
+        [MaxLength(16, ErrorMessage = "Maximum 16 characters"), MinLength(8, ErrorMessage = "Minimun 8 characters")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
+        [Required]
         public string Telefon { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LoanHistory> LoanHistory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
