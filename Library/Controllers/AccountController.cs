@@ -21,13 +21,12 @@ namespace Library.Controllers
         public ActionResult Login(UserAsp user)
         {
             var authUser = db.UserAsp.Where(x => x.Email == user.Email && x.Password == user.Password).FirstOrDefault();
+            
             if (authUser != null)
             {
-                if (ModelState.IsValid)
-                {
                     Session["User"] = authUser;
                     return RedirectToAction("Index", controllerName: "Book");
-                }
+                
             }
             else
             {
@@ -51,6 +50,7 @@ namespace Library.Controllers
                 {
                     db.UserAsp.Add(user);
                     db.SaveChanges();
+                    TempData["SuccessRegistration"] = "Uspjesna registracija";
                     return RedirectToAction("Index", controllerName: "Book");
                 }
                 else
