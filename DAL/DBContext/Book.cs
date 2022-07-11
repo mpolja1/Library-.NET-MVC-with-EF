@@ -40,5 +40,7 @@ namespace DAL.DBContext
         public virtual ICollection<LoanHistory> LoanHistory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PurchasedHistory> PurchasedHistory { get; set; }
+
+       
     }
 }
