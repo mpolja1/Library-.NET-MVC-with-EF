@@ -94,6 +94,10 @@
 
     </dl>
 </div>
+<div class="container">
+    @Html.ActionLink("Add to cart", "AddItemToCart","ShoppingCart",null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Borrow", "Borrow", null, new { @class = "btn btn-primary" })
+</div>
 <p> 
     @Html.ActionLink("Back to Home page", "Index")
 </p>
