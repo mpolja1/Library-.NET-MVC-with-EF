@@ -36,7 +36,7 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    @Html.ActionLink("Profile", "Profile", "UserProfile",  new { id = user.UserId }, null)
+                                    @Html.ActionLink("Profile", "Profile", "UserProfile", new { id = user.UserId }, null)
                                 </li>
 
                                 <li>
@@ -48,6 +48,11 @@
                                 </li>
                             </ul>
 
+                        </li>
+                        <li>
+                            <a href="@Url.Action("ShoppingCart", "ShoppingCart")">
+                                <span class="glyphicon glyphicon-shopping-cart">Cart</span>
+                            </a>
                         </li>
                         <li>
                             <button class="btn btn-danger"
