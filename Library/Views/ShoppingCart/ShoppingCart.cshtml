@@ -35,6 +35,13 @@ else
                             <td scope="row">@book.Title</td>
                             <td> <img src="@book.CoverImage" alt="book error" height="150px" width="200px" /> </td>
                             <td>@book.BuyPrice</td>
+                            <td>
+                                <a href="@Url.Action("RemoveItem", "ShoppingCart", new {id = book.BookId})">
+                                    <span class="glyphicon glyphicon-remove" style="color:red">
+                                    </span>
+                                </a>
+                            </td>
+
                         </tr>
                     }
                     <tr>
@@ -50,5 +57,12 @@ else
         </div>
     </div>
 
+    <input id="Terms of service" type="checkbox" value="false" name="TermsOfService" />
+    <input type="hidden" value="false" name="TermsOfService" />
+    <span>Terms of serivce </span>
+
+    <div>
+        @Html.ActionLink("Pay", "Paypal", null, new { @class = "btn btn-primary" })
+    </div>
 }
 

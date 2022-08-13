@@ -49,6 +49,40 @@ namespace Library.Controllers
             
             return View((List<Book>)Session["cart"]);
         }
+
+        public ActionResult RemoveItem(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            cartBooks = (List<Book>)Session["cart"];
+            var book = cartBooks.Find(x=>x.BookId==id);
+            cartBooks.Remove(book);
+            Session["cart"] = cartBooks;
+            Session["cartCount"] = Convert.ToInt32(Session["cartCount"]) - 1;
+            
+            return RedirectToAction("ShoppingCart","ShoppingCart");
+        }
+
+
+
+
+        public ActionResult Paypal()
+        {
+
+         
+
+            return View();
+        }
+        public ActionResult proba()
+        {
+            var purhhist = db.PurchasedHistory.Where(x=> x.UserAsp.UserId.Equals(10));
+
+
+            return View(purhhist);
+        }
     }
 
   
