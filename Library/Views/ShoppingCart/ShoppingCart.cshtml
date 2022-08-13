@@ -2,92 +2,53 @@
 
 @{
     ViewBag.Title = "ShoppingCart";
+    double sum = 0;
 }
 
-<h2>ShoppingCart</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ISBN)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BuyPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BorrowPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StockAvailabilty)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CoverImage)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Condition)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SoldNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Author.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Publisher.Name)
-        </th>
-        <th></th>
-    </tr>
+@if (Model == null)
+{
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ISBN)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BuyPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BorrowPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StockAvailabilty)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CoverImage)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Condition)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SoldNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Publisher.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.BookId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.BookId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.BookId })
-        </td>
-    </tr>
+
+    <div class="container">
+        <h1>Cart is empty</h1>
+    </div>
+}
+else
+{
+
+    <div class="container" style="margin-top:10px">
+        <div class="table-responsive">
+            <table class="table table-bordered table-sm table-striped m-10px">
+                <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var book in Model)
+                    {
+                        sum += book.BuyPrice;
+                        <tr>
+                            <td scope="row">@book.Title</td>
+                            <td> <img src="@book.CoverImage" alt="book error" height="150px" width="200px" /> </td>
+                            <td>@book.BuyPrice</td>
+                        </tr>
+                    }
+                    <tr>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" class="text-right"> <b> Total </b></td>
+                        <td> @sum </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
 }
 
-</table>
