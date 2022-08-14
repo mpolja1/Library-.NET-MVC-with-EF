@@ -16,50 +16,60 @@
         @TempData["AccountDeleted"]
     </div>
 }
-
-@foreach (var book in Model)
+@using (Html.BeginForm(null, null, FormMethod.Get))
 {
 
-    <div class="content col-lg-3" style="margin-bottom:60px; ">
-        <div class="card mb-2 table-bordered " style="padding: 5px">
+    <div class="form-inline">
 
-            <h4 class="card-title text-center" style="margin:5px;height:75px;"> @book.Title </h4>
+        <div class="container">
+            <input class="form-control" name="search" type="search" placeholder="Book/Author" aria-label="Search">
+            <button class="btn btn-success my-1 my-sm-0" style="margin-bottom:5px;" type="submit">Search</button>
+        </div>
+    </div>
+}
+    @foreach (var book in Model)
+    {
 
-            <hr />
-            <div class="row ">
-                <div class="col-md-7">
-                    <img src="@book.CoverImage" class="img-fluid" style="border-radius: 5%" width="230" height="200">
+        <div class="content col-lg-3" style="margin-bottom:60px; ">
+            <div class="card mb-2 table-bordered " style="padding: 5px">
+
+                <h4 class="card-title text-center" style="margin:5px;height:75px;"> @book.Title </h4>
+
+                <hr />
+                <div class="row ">
+                    <div class="col-md-7">
+                        <img src="@book.CoverImage" class="img-fluid" style="border-radius: 5%" width="230" height="200">
+                    </div>
+
                 </div>
+                <hr />
+                <div class="card-body" style="padding:10px">
+                    <div class="col-sm-8">
+                        <span class="font-bold"><strong> @book.Author.FirstName @book.Author.LastName</strong></span>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-4">
+                                @Html.ActionLink("Details", "Details", new { id = book.BookId }, new { @class = "btn btn-primary rounded-3" })
 
-            </div>
-            <hr />
-            <div class="card-body" style="padding:10px">
-                <div class="col-sm-8">
-                    <span class="font-bold"><strong> @book.Author.FirstName @book.Author.LastName</strong></span>
-                </div>
-                <div class="card-footer">
-                    <div class="row">
-                        <div class="col-md-4">
-                            @Html.ActionLink("Details", "Details", new { id = book.BookId }, new { @class = "btn btn-primary rounded-3" })
-
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
-    </div>
+    }
 
-}
+    @section scripts{
 
-@section scripts{
+        <script>
+            $(document).ready(function () {
+                $("#registration").fadeOut(3000);
 
-    <script>
-        $(document).ready(function () {
-            $("#registration").fadeOut(3000);
-
-        });
-    </script>
+            });
+        </script>
 
 
-}
+    }
