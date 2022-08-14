@@ -22,9 +22,7 @@ namespace Library.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var book = db.Book.Find(id);
-            cartBooks.Add(book);
-
-
+ 
             if (Session["cart"] == null)
             {
                 cartBooks.Add(book);
@@ -36,19 +34,54 @@ namespace Library.Controllers
             }
             else
             {
+                cartBooks= (List<Book>)Session["cart"];
                 cartBooks.Add(book);
-                Session["cart"] = cartBooks;
                 ViewBag.cart = cartBooks.Count();
-                Session["count"] = Convert.ToInt32(Session["count"]) + 1;
+                Session["cartCount"] = Convert.ToInt32(Session["cartCount"]) + 1;
 
             }
             return RedirectToAction("Index", "Book");
+            
 
         }
         public ActionResult ShoppingCart()
         {
-            var book = db.Book;
-            return View(book.ToList());
+            
+            return View((List<Book>)Session["cart"]);
+        }
+
+        public ActionResult RemoveItem(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            cartBooks = (List<Book>)Session["cart"];
+            var book = cartBooks.Find(x=>x.BookId==id);
+            cartBooks.Remove(book);
+            Session["cart"] = cartBooks;
+            Session["cartCount"] = Convert.ToInt32(Session["cartCount"]) - 1;
+            
+            return RedirectToAction("ShoppingCart","ShoppingCart");
+        }
+
+
+
+
+        public ActionResult Paypal()
+        {
+
+         
+
+            return View();
+        }
+        public ActionResult proba()
+        {
+            var purhhist = db.PurchasedHistory.Where(x=> x.UserAsp.UserId.Equals(10));
+
+
+            return View(purhhist);
         }
     }
 
