@@ -17,6 +17,13 @@ namespace Library.Controllers
         // GET: Book
         public ActionResult Index(string search)
         {
+            if (!String.IsNullOrEmpty(search))
+            {
+                var books = db.Book.Include(b => b.Author).Include(b => b.Publisher)
+                            .Where(b=>b.Title.Contains(search) || b.Author.FirstName.Contains(search));
+                return View(books);
+            }
+
             var book = db.Book.Include(b => b.Author).Include(b => b.Publisher);
             return View(book.ToList());
         }
