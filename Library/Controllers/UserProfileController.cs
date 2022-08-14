@@ -44,5 +44,16 @@ namespace Library.Controllers
          
             return View(user);
         }
+        public ActionResult PurchasedBooks(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            var purhhist = db.PurchasedHistory.Where(x => x.UserAsp.UserId == id);
+
+
+            return View(purhhist);
+        }
     }
 }

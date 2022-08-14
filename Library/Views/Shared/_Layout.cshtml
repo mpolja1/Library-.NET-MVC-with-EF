@@ -40,11 +40,11 @@
                                 </li>
 
                                 <li>
-                                    <a class="dropdown-item" href="#">Posudbe</a>
+                                    @Html.ActionLink("Purchased Books", "PurchasedBooks", "UserProfile", new { id = user.UserId }, null)
                                 </li>
 
                                 <li>
-                                    <a class="dropdown-item" href="#">Kupljene knjige</a>
+                                    @Html.ActionLink("Loans", "Loan", "UserProfile", new { id = user.UserId }, null)
                                 </li>
                             </ul>
 

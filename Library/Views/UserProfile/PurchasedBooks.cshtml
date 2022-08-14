@@ -1,0 +1,45 @@
+﻿@model IEnumerable<DAL.DBContext.PurchasedHistory>
+
+@{
+    ViewBag.Title = "PurshaseHistory";
+}
+
+<h2>PurshaseHistory</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Book.Title)
+        </th>
+        <th>
+           Author
+        </th>
+    
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Book.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Book.Author.FirstName)
+        </td>
+       
+    </tr>
+}
+
+</table>
+
+@if (Model.Any()==false)
+{
+    @Html.ActionLink("Time to buy book","Index","Book",null,new {@class="btn btn-primary"})
+    
+}

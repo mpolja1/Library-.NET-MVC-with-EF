@@ -72,8 +72,6 @@ namespace Library.Controllers
         public ActionResult Paypal()
         {
 
-         
-
             return View();
         }
         public ActionResult proba()
