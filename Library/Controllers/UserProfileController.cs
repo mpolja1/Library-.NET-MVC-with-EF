@@ -55,5 +55,16 @@ namespace Library.Controllers
 
             return View(purhhist);
         }
+        public ActionResult Loan(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            var loans = db.LoanHistory.Where(x => x.UserAsp.UserId == id);
+
+
+            return View(loans);
+        }
     }
 }
