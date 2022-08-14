@@ -10,6 +10,12 @@
         @TempData["SuccessRegistration"]
     </div>
 }
+@if (TempData["AccountDeleted"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["AccountDeleted"]
+    </div>
+}
 
 @foreach (var book in Model)
 {
@@ -51,7 +57,7 @@
     <script>
         $(document).ready(function () {
             $("#registration").fadeOut(3000);
-           
+
         });
     </script>
 

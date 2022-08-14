@@ -66,5 +66,20 @@ namespace Library.Controllers
 
             return View(loans);
         }
+        public ActionResult DeleteAccount(int? idUser)
+        {
+            if (idUser == null)
+            {
+                return HttpNotFound();
+            }
+            var user = db.UserAsp.Find(idUser);
+
+            db.UserAsp.Attach(user).DeletedAt=DateTime.Now;
+            db.Entry(user).Property(x => x.DeletedAt).IsModified = true;
+            db.SaveChanges();
+            TempData["AccountDeleted"] = "Account deleted successfully";
+
+            return RedirectToAction("Logout", "Account");
+        }
     }
 }
