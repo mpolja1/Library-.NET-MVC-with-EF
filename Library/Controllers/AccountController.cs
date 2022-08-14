@@ -20,7 +20,7 @@ namespace Library.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(UserAsp user)
         {
-            var authUser = db.UserAsp.Where(x => x.Email == user.Email && x.Password == user.Password).FirstOrDefault();
+            var authUser = db.UserAsp.Where(x => x.Email == user.Email && x.Password == user.Password && x.DeletedAt==null).FirstOrDefault();
             
             if (authUser != null)
             {

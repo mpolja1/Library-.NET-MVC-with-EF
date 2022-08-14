@@ -175,6 +175,7 @@
     <Content Include="Views\ShoppingCart\ShoppingCart.cshtml" />
     <Content Include="Views\ShoppingCart\proba.cshtml" />
     <Content Include="Views\UserProfile\PurchasedBooks.cshtml" />
+    <Content Include="Views\UserProfile\Loan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
