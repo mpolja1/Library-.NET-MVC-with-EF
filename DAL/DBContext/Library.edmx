@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="KnjiznicaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="KnjiznicaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Author">
           <Key>
             <PropertyRef Name="AuthorId" />
@@ -33,6 +33,7 @@
           <Property Name="Condition" Type="bit" Nullable="false" />
           <Property Name="PublisherId" Type="int" />
           <Property Name="SoldNumber" Type="int" />
+          <Property Name="DeletedAt" Type="smalldatetime" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -65,6 +66,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Borrowed" Type="datetime" Nullable="false" />
+          <Property Name="BorrowedUntil" Type="date" />
           <Property Name="Returned" Type="datetime" />
           <Property Name="BookId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
@@ -75,7 +77,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="PurchasedHistory">
           <Key>
@@ -228,8 +230,7 @@
             <End Role="Book" EntitySet="Book" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="KnjiznicaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -264,8 +265,9 @@
           <Property Name="SoldNumber" Type="Int32" />
           <NavigationProperty Name="Author" Relationship="Self.FK_dbo_Books_dbo_Authors_AuthorId" FromRole="Book" ToRole="Author" />
           <NavigationProperty Name="Publisher" Relationship="Self.FK__Book__PublisherI__2739D489" FromRole="Book" ToRole="Publisher" />
-          <NavigationProperty Name="LoanHistory" Relationship="Self.FK__LoanHisto__BookI__30C33EC3" FromRole="Book" ToRole="LoanHistory" />
           <NavigationProperty Name="PurchasedHistory" Relationship="Self.FK__Purchased__BookI__2CF2ADDF" FromRole="Book" ToRole="PurchasedHistory" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="LoanHistory" Relationship="KnjiznicaModel.FK__LoanHisto__BookI__30C33EC3" FromRole="Book" ToRole="LoanHistory" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -292,25 +294,12 @@
           <Property Name="Iban" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="LoanHistory">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Borrowed" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Returned" Type="DateTime" Precision="3" />
-          <Property Name="BookId" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="Delay" Type="Int32" />
-          <NavigationProperty Name="Book" Relationship="Self.FK__LoanHisto__BookI__30C33EC3" FromRole="LoanHistory" ToRole="Book" />
-          <NavigationProperty Name="UserAsp" Relationship="Self.FK__LoanHisto__UserI__31B762FC" FromRole="LoanHistory" ToRole="UserAsp" />
-        </EntityType>
         <EntityType Name="Publisher">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Book" Relationship="Self.FK__Book__PublisherI__2739D489" FromRole="Publisher" ToRole="Book" />
         </EntityType>
         <EntityType Name="PurchasedHistory">
@@ -348,8 +337,8 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Telefon" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="LoanHistory" Relationship="Self.FK__LoanHisto__UserI__31B762FC" FromRole="UserAsp" ToRole="LoanHistory" />
           <NavigationProperty Name="PurchasedHistory" Relationship="Self.FK__Purchased__UserI__2DE6D218" FromRole="UserAsp" ToRole="PurchasedHistory" />
+          <NavigationProperty Name="LoanHistory" Relationship="KnjiznicaModel.FK__LoanHisto__UserI__31B762FC" FromRole="UserAsp" ToRole="LoanHistory" />
         </EntityType>
         <Association Name="FK_dbo_Books_dbo_Authors_AuthorId">
           <End Role="Author" Type="Self.Author" Multiplicity="1">
@@ -377,18 +366,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LoanHisto__BookI__30C33EC3">
-          <End Role="Book" Type="Self.Book" Multiplicity="1" />
-          <End Role="LoanHistory" Type="Self.LoanHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Book">
-              <PropertyRef Name="BookId" />
-            </Principal>
-            <Dependent Role="LoanHistory">
-              <PropertyRef Name="BookId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Purchased__BookI__2CF2ADDF">
           <End Role="Book" Type="Self.Book" Multiplicity="1" />
           <End Role="PurchasedHistory" Type="Self.PurchasedHistory" Multiplicity="*" />
@@ -398,18 +375,6 @@
             </Principal>
             <Dependent Role="PurchasedHistory">
               <PropertyRef Name="BookId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__LoanHisto__UserI__31B762FC">
-          <End Role="UserAsp" Type="Self.UserAsp" Multiplicity="1" />
-          <End Role="LoanHistory" Type="Self.LoanHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserAsp">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="LoanHistory">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -430,7 +395,6 @@
           <EntitySet Name="Book" EntityType="Self.Book" />
           <EntitySet Name="Employee" EntityType="Self.Employee" />
           <EntitySet Name="Library" EntityType="Self.Library" />
-          <EntitySet Name="LoanHistory" EntityType="Self.LoanHistory" />
           <EntitySet Name="Publisher" EntityType="Self.Publisher" />
           <EntitySet Name="PurchasedHistory" EntityType="Self.PurchasedHistory" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
@@ -443,17 +407,9 @@
             <End Role="Publisher" EntitySet="Publisher" />
             <End Role="Book" EntitySet="Book" />
           </AssociationSet>
-          <AssociationSet Name="FK__LoanHisto__BookI__30C33EC3" Association="Self.FK__LoanHisto__BookI__30C33EC3">
-            <End Role="Book" EntitySet="Book" />
-            <End Role="LoanHistory" EntitySet="LoanHistory" />
-          </AssociationSet>
           <AssociationSet Name="FK__Purchased__BookI__2CF2ADDF" Association="Self.FK__Purchased__BookI__2CF2ADDF">
             <End Role="Book" EntitySet="Book" />
             <End Role="PurchasedHistory" EntitySet="PurchasedHistory" />
-          </AssociationSet>
-          <AssociationSet Name="FK__LoanHisto__UserI__31B762FC" Association="Self.FK__LoanHisto__UserI__31B762FC">
-            <End Role="UserAsp" EntitySet="UserAsp" />
-            <End Role="LoanHistory" EntitySet="LoanHistory" />
           </AssociationSet>
           <AssociationSet Name="FK__Purchased__UserI__2DE6D218" Association="Self.FK__Purchased__UserI__2DE6D218">
             <End Role="UserAsp" EntitySet="UserAsp" />
@@ -467,7 +423,54 @@
             <Parameter Name="Email" Mode="In" Type="String" />
             <Parameter Name="Telephone" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="LoanHistory" EntityType="KnjiznicaModel.LoanHistory" />
+          <AssociationSet Name="FK__LoanHisto__BookI__30C33EC3" Association="KnjiznicaModel.FK__LoanHisto__BookI__30C33EC3">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="LoanHistory" EntitySet="LoanHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoanHisto__UserI__31B762FC" Association="KnjiznicaModel.FK__LoanHisto__UserI__31B762FC">
+            <End Role="UserAsp" EntitySet="UserAsp" />
+            <End Role="LoanHistory" EntitySet="LoanHistory" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="LoanHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Borrowed" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BorrowedUntil" Type="DateTime" Precision="0" />
+          <Property Name="Returned" Type="DateTime" Precision="3" />
+          <Property Name="BookId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Delay" Type="Int32" />
+          <NavigationProperty Name="Book" Relationship="KnjiznicaModel.FK__LoanHisto__BookI__30C33EC3" FromRole="LoanHistory" ToRole="Book" />
+          <NavigationProperty Name="UserAsp" Relationship="KnjiznicaModel.FK__LoanHisto__UserI__31B762FC" FromRole="LoanHistory" ToRole="UserAsp" />
+        </EntityType>
+        <Association Name="FK__LoanHisto__BookI__30C33EC3">
+          <End Type="KnjiznicaModel.Book" Role="Book" Multiplicity="1" />
+          <End Type="KnjiznicaModel.LoanHistory" Role="LoanHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="BookId" />
+            </Principal>
+            <Dependent Role="LoanHistory">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoanHisto__UserI__31B762FC">
+          <End Type="KnjiznicaModel.UserAsp" Role="UserAsp" Multiplicity="1" />
+          <End Type="KnjiznicaModel.LoanHistory" Role="LoanHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAsp">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="LoanHistory">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -490,6 +493,7 @@
           <EntitySetMapping Name="Book">
             <EntityTypeMapping TypeName="KnjiznicaModel.Book">
               <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
                 <ScalarProperty Name="BookId" ColumnName="BookId" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
@@ -529,18 +533,6 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Iban" ColumnName="Iban" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LoanHistory">
-            <EntityTypeMapping TypeName="KnjiznicaModel.LoanHistory">
-              <MappingFragment StoreEntitySet="LoanHistory">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Borrowed" ColumnName="Borrowed" />
-                <ScalarProperty Name="Returned" ColumnName="Returned" />
-                <ScalarProperty Name="BookId" ColumnName="BookId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Delay" ColumnName="Delay" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -590,6 +582,19 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SaveEmployee" FunctionName="KnjiznicaModel.Store.SaveEmployee" />
+          <EntitySetMapping Name="LoanHistory">
+            <EntityTypeMapping TypeName="KnjiznicaModel.LoanHistory">
+              <MappingFragment StoreEntitySet="LoanHistory">
+                <ScalarProperty Name="Delay" ColumnName="Delay" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="Returned" ColumnName="Returned" />
+                <ScalarProperty Name="BorrowedUntil" ColumnName="BorrowedUntil" />
+                <ScalarProperty Name="Borrowed" ColumnName="Borrowed" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

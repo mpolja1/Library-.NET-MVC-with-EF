@@ -11,7 +11,8 @@ namespace DAL.DBContext
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Author
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,6 +24,14 @@ namespace DAL.DBContext
         public int AuthorId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        [NotMapped]
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+        }
         public string ImagePath { get; set; }
         public System.DateTime DateOfBirth { get; set; }
         public string Biography { get; set; }
@@ -30,10 +39,5 @@ namespace DAL.DBContext
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Book> Book { get; set; }
-
-        public override string ToString()
-        {
-            return FirstName + " " + LastName;
-        }
     }
 }

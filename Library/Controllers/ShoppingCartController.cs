@@ -1,6 +1,7 @@
 ﻿using DAL.DBContext;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -22,6 +23,7 @@ namespace Library.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var book = db.Book.Find(id);
+
             var user = Session["User"] as UserAsp;
             if (user == null)
             {
@@ -71,11 +73,38 @@ namespace Library.Controllers
             return RedirectToAction("ShoppingCart","ShoppingCart");
         }
 
-        public ActionResult Borrow()
+        [HttpGet]
+        public ActionResult Borrow(int? id)
         {
+            if (id==null)
+            {
+                return HttpNotFound();
+            }
+            var book = db.Book.Find(id);
 
+            return View(book);
+        }
 
-            return View();
+        [HttpPost]
+        public ActionResult Borrow(LoanHistory loan)
+        {
+            var user = Session["User"] as UserAsp;
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            loan.UserId = user.UserId;
+            loan.Borrowed = DateTime.Now;
+
+            double bookPrice = (double)db.Book.Find(loan.BookId).BorrowPrice;
+
+            db.LoanHistory.Add(loan);
+            db.SaveChanges();
+            double totalPrice = 0;
+            totalPrice = (double)((loan.BorrowedUntil - loan.Borrowed).TotalDays * bookPrice);
+            TempData["BookBorrow"] = $"You have successfully borrowed a book. The book is waiting for you in the bookshop. The total price is: {Convert.ToInt32(totalPrice)} kn";
+          
+            return RedirectToAction("Index","Book");
         }
 
 
