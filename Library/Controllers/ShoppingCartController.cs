@@ -71,9 +71,21 @@ namespace Library.Controllers
             return RedirectToAction("ShoppingCart","ShoppingCart");
         }
 
-        public ActionResult Borrow()
+        [HttpGet]
+        public ActionResult Borrow(int? id)
         {
+            if (id==null)
+            {
+                return HttpNotFound();
+            }
 
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Borrow(LoanHistory loan)
+        {
 
             return View();
         }
