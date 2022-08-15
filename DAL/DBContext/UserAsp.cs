@@ -42,7 +42,7 @@ namespace DAL.DBContext
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }
 
-        [Required(ErrorMessage ="*")]
+        [Required(ErrorMessage = "*")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
