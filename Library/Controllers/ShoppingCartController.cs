@@ -22,7 +22,12 @@ namespace Library.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var book = db.Book.Find(id);
- 
+            var user = Session["User"] as UserAsp;
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             if (Session["cart"] == null)
             {
                 cartBooks.Add(book);
@@ -66,7 +71,12 @@ namespace Library.Controllers
             return RedirectToAction("ShoppingCart","ShoppingCart");
         }
 
+        public ActionResult Borrow()
+        {
 
+
+            return View();
+        }
 
 
         public ActionResult Paypal()
@@ -74,13 +84,7 @@ namespace Library.Controllers
 
             return View();
         }
-        public ActionResult proba()
-        {
-            var purhhist = db.PurchasedHistory.Where(x=> x.UserAsp.UserId.Equals(10));
-
-
-            return View(purhhist);
-        }
+       
     }
 
   
