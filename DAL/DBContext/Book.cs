@@ -17,8 +17,8 @@ namespace DAL.DBContext
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Book()
         {
-            this.LoanHistory = new HashSet<LoanHistory>();
             this.PurchasedHistory = new HashSet<PurchasedHistory>();
+            this.LoanHistory = new HashSet<LoanHistory>();
         }
     
         public int BookId { get; set; }
@@ -33,14 +33,13 @@ namespace DAL.DBContext
         public bool Condition { get; set; }
         public Nullable<int> PublisherId { get; set; }
         public Nullable<int> SoldNumber { get; set; }
+        public Nullable<System.DateTime> DeletedAt { get; set; }
     
         public virtual Author Author { get; set; }
         public virtual Publisher Publisher { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LoanHistory> LoanHistory { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PurchasedHistory> PurchasedHistory { get; set; }
-
-       
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LoanHistory> LoanHistory { get; set; }
     }
 }

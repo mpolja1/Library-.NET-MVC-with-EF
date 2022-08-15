@@ -31,11 +31,11 @@ namespace DAL.DBContext
         public virtual DbSet<Book> Book { get; set; }
         public virtual DbSet<Employee> Employee { get; set; }
         public virtual DbSet<Library> Library { get; set; }
-        public virtual DbSet<LoanHistory> LoanHistory { get; set; }
         public virtual DbSet<Publisher> Publisher { get; set; }
         public virtual DbSet<PurchasedHistory> PurchasedHistory { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<UserAsp> UserAsp { get; set; }
+        public virtual DbSet<LoanHistory> LoanHistory { get; set; }
     
         public virtual int SaveEmployee(string firstName, string lastName, string username, string password, string email, string telephone)
         {

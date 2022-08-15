@@ -96,7 +96,7 @@
 </div>
 <div class="container">
     @Html.ActionLink("Add to cart", "AddItemToCart","ShoppingCart", new { id = Model.BookId }, new { @class = "btn btn-primary rounded-3" })
-    @Html.ActionLink("Borrow", "Borrow", new {id = Model.BookId}, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Borrow", "Borrow","ShoppingCart", new {id = Model.BookId}, new { @class = "btn btn-primary" })
 </div>
 <p> 
     @Html.ActionLink("Back to Home page", "Index")

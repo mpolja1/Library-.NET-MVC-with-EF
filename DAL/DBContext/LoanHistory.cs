@@ -16,6 +16,7 @@ namespace DAL.DBContext
     {
         public int Id { get; set; }
         public System.DateTime Borrowed { get; set; }
+        public DateTime BorrowedUntil { get; set; }
         public Nullable<System.DateTime> Returned { get; set; }
         public int BookId { get; set; }
         public int UserId { get; set; }

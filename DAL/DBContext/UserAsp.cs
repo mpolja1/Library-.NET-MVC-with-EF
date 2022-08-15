@@ -11,7 +11,6 @@ namespace DAL.DBContext
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class UserAsp
@@ -19,15 +18,13 @@ namespace DAL.DBContext
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UserAsp()
         {
-            this.LoanHistory = new HashSet<LoanHistory>();
             this.PurchasedHistory = new HashSet<PurchasedHistory>();
+            this.LoanHistory = new HashSet<LoanHistory>();
         }
-
+    
         public int UserId { get; set; }
         public string CustomId { get; set; }
-        [Required]
         public string FirstName { get; set; }
-        [Required]
         public string LastName { get; set; }
 
         [NotMapped]
@@ -41,21 +38,13 @@ namespace DAL.DBContext
         public string Adress { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }
-
-        [Required(ErrorMessage = "*")]
-        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-
-        [Required(ErrorMessage = "*")]
-        [MaxLength(16, ErrorMessage = "Maximum 16 characters"), MinLength(8, ErrorMessage = "Minimun 8 characters")]
-        [DataType(DataType.Password)]
         public string Password { get; set; }
-        [Required]
         public string Telefon { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LoanHistory> LoanHistory { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PurchasedHistory> PurchasedHistory { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LoanHistory> LoanHistory { get; set; }
     }
 }
