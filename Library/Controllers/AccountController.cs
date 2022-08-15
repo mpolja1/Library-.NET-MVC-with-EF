@@ -1,6 +1,8 @@
 ﻿using DAL.DBContext;
+using DAL.Utility;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -70,6 +72,44 @@ namespace Library.Controllers
             Session.Abandon();
             return RedirectToAction("index", "Book");
         }
+        public ActionResult ForgotPassword()
+        {
 
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ForgotPassword(string email)
+        {
+            string newPassword = Guid.NewGuid().ToString();
+            newPassword = newPassword.Substring(0, 15);
+            var user = db.UserAsp.Where(x => x.Email == email).FirstOrDefault();
+           
+            if (user != null)
+            {
+                try
+                {
+                    db.UserAsp.Attach(user).Password = newPassword;
+                    db.Entry(user).Property(x => x.Password).IsModified = true;
+                    db.SaveChanges();
+
+                    EmailUtility.SendMail("jpoljakovic01@gmail.com", "Forgot password", "This is your new password: " + newPassword, null);
+                    ViewBag.ForgotPassword = "New password is sent on Email";
+                }
+                catch (Exception e)
+                {
+
+                    throw;
+                }
+ 
+            }
+            else
+            {
+                ViewBag.ErrorForgotPassword = "Email doesn't exists";
+            }
+
+            
+            return View();
+        }
     }
 }
