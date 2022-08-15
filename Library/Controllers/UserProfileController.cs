@@ -1,4 +1,5 @@
 ﻿using DAL.DBContext;
+using DAL.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -77,6 +78,7 @@ namespace Library.Controllers
             db.UserAsp.Attach(user).DeletedAt=DateTime.Now;
             db.Entry(user).Property(x => x.DeletedAt).IsModified = true;
             db.SaveChanges();
+            EmailUtility.SendMail("jpoljakovic01@gmail.com", "Account deleted", "Your accoutn is successfully deleted", null);
             TempData["AccountDeleted"] = "Account deleted successfully";
 
             return RedirectToAction("Logout", "Account");
