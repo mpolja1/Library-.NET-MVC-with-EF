@@ -104,7 +104,7 @@
         @Html.ActionLink("Add to cart", "AddItemToCart", "ShoppingCart", new { id = Model.BookId }, new { @class = "btn btn-primary rounded-3" })
         @Html.ActionLink("Borrow", "Borrow", "ShoppingCart", new { id = Model.BookId }, new { @class = "btn btn-success" })
     </div>
-    <span class="btn btn-danger" style="margin:10px 0 0 0" >
+    <span style="margin:10px 0 5px 0" >
         @Html.ActionLink("Back to Home page", "Index")
     </span>
 </div>

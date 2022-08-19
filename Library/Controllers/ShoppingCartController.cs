@@ -104,6 +104,8 @@ namespace Library.Controllers
             totalPrice = (double)((loan.BorrowedUntil - loan.Borrowed).TotalDays * bookPrice);
             TempData["BookBorrow"] = $"You have successfully borrowed a book. The book is waiting for you in the bookshop. The total price is: {Convert.ToInt32(totalPrice)} kn";
           
+
+            
             return RedirectToAction("Index","Book");
         }
 

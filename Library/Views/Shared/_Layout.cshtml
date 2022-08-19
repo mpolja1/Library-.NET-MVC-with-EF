@@ -56,10 +56,8 @@
                             </a>
                         </li>
                         <li>
-                            <button class="btn btn-default"
-                                    style="margin-top:10px">
-                                @Html.ActionLink("Logout", actionName: "Logout", controllerName: "Account")
-                            </button>
+                                @Html.ActionLink("Logout", actionName: "Logout", controllerName: "Account",routeValues: null,htmlAttributes: new {@class="btn btn-danger",style="padding:5px;margin-top:10px"})
+                          
                         </li>
                     }
                     else
