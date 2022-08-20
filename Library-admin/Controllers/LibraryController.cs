@@ -23,18 +23,19 @@ namespace Library_admin.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(library);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Address,Iban,Image")] Library library)
+        public ActionResult Edit([Bind(Include = "Id,Name,Address,Iban")] Library library)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(library).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Book");
             }
             return View(library);
         }

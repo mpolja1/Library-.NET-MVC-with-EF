@@ -22,7 +22,7 @@ namespace Library_admin.Controllers
         //[IsAuthorized]
         public async Task<ActionResult> Index()
         {
-            ViewBag.Poruka = "Zelite li obrisatiiiii";
+            ViewBag.Poruka = "Do you want to delete?";
             var book = db.Book.Where(x => x.DeletedAt == null);
             return View(await book.ToListAsync());
         }
