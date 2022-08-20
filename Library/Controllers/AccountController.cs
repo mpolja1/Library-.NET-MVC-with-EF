@@ -93,7 +93,7 @@ namespace Library.Controllers
                     db.Entry(user).Property(x => x.Password).IsModified = true;
                     db.SaveChanges();
 
-                    EmailUtility.SendMail("jpoljakovic01@gmail.com", "Forgot password", "This is your new password: " + newPassword, null);
+                    EmailUtility.SendMail(email, "Forgot password", "This is your new password: " + newPassword, null);
                     ViewBag.ForgotPassword = "New password is sent on Email";
                 }
                 catch (Exception e)
