@@ -125,7 +125,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BookController.cs" />
-    <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Global.asax.cs">
@@ -189,17 +189,16 @@
     <Content Include="Views\Account\Registration.cshtml" />
     <Content Include="Views\UserProfile\Profile.cshtml" />
     <Content Include="Views\ShoppingCart\ShoppingCart.cshtml" />
-    <Content Include="Views\ShoppingCart\proba.cshtml" />
     <Content Include="Views\UserProfile\PurchasedBooks.cshtml" />
     <Content Include="Views\UserProfile\Loan.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\ShoppingCart\Borrow.cshtml" />
     <Content Include="Views\ShoppingCart\Failuer.cshtml" />
     <Content Include="Views\ShoppingCart\Success.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Payment\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

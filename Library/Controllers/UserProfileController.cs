@@ -80,8 +80,8 @@ namespace Library.Controllers
             db.SaveChanges();
             EmailUtility.SendMail(user.Email, "Account deleted", "Your accoutn is successfully deleted", null);
             TempData["AccountDeleted"] = "Account deleted successfully";
-
-            return RedirectToAction("Logout", "Account");
+            Session.Clear();
+            return RedirectToAction("Index", "Book");
         }
     }
 }

@@ -6,11 +6,13 @@ using System.Web.Mvc;
 
 namespace Library.Controllers
 {
-    public class PaymentController : Controller
+    public class ErrorController : Controller
     {
-        // GET: Payment
-        public ActionResult Index()
+        // GET: Error
+        public ActionResult Index(string error)
         {
+
+            ViewBag.err = error;
             return View();
         }
     }

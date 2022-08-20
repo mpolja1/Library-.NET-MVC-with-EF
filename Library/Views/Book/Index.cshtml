@@ -13,7 +13,7 @@
 }
 @if (TempData["AccountDeleted"] != null)
 {
-    <div class="alert alert-success">
+    <div id="accdeleted" class="alert alert-success">
         @TempData["AccountDeleted"]
     </div>
 }
@@ -76,6 +76,7 @@
         $(document).ready(function () {
             $("#registration").fadeOut(3000);
             $("#borrow").fadeOut(7000);
+            $("#accdeleted").fadeOut(3000);
             
         });
     </script>
