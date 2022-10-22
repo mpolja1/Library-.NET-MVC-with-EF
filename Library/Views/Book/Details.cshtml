@@ -1,0 +1,108 @@
+﻿@model DAL.DBContext.Book
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container">
+    <div class="row">
+        <h4>Book</h4>
+        <hr />
+        <div class="col" style="margin:50px 0 50px 0; text-align:center;">
+            <img src="@Model.CoverImage" class="img-thumbnail" alt="Alternate Text" />
+        </div>
+        <div class="col">
+            <dl class="dl-horizontal">
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Author.Link)
+                </dt>
+
+                <dd>
+                    <a href="@Model.Author.Link">Author</a>
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Condition)
+                </dt>
+
+                <dd>
+                    @if (Model.Condition == true)
+                    {
+                        <span>New</span>
+                    }
+                    else
+                    {
+                        <span>Used</span>
+                    }
+
+                </dd>
+
+
+
+
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Publisher.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Publisher.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ISBN)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ISBN)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.BuyPrice)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.BuyPrice)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.BorrowPrice)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.BorrowPrice)
+                </dd>
+
+            </dl>
+        </div>
+        
+    </div>
+</div>
+<div class="container" style="text-align:center">
+    <div>
+        @Html.ActionLink("Add to cart", "AddItemToCart", "ShoppingCart", new { id = Model.BookId }, new { @class = "btn btn-primary rounded-3" })
+        @Html.ActionLink("Borrow", "Borrow", "ShoppingCart", new { id = Model.BookId }, new { @class = "btn btn-success" })
+    </div>
+    <span style="margin:10px 0 5px 0" >
+        @Html.ActionLink("Back to Home page", "Index")
+    </span>
+</div>
+

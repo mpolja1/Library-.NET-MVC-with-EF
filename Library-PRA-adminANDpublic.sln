@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32319.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library-public", "Library\Library-public.csproj", "{8A3B0A9F-AF22-4B7B-ACC1-351AC384D746}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{2E093AA7-2C71-4B8A-AB2F-1B9EF2C528B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library-admin", "Library-admin\Library-admin.csproj", "{52DC6F25-95C7-46D7-9BF5-5425DE737A83}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A3B0A9F-AF22-4B7B-ACC1-351AC384D746}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A3B0A9F-AF22-4B7B-ACC1-351AC384D746}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A3B0A9F-AF22-4B7B-ACC1-351AC384D746}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A3B0A9F-AF22-4B7B-ACC1-351AC384D746}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E093AA7-2C71-4B8A-AB2F-1B9EF2C528B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E093AA7-2C71-4B8A-AB2F-1B9EF2C528B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E093AA7-2C71-4B8A-AB2F-1B9EF2C528B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E093AA7-2C71-4B8A-AB2F-1B9EF2C528B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52DC6F25-95C7-46D7-9BF5-5425DE737A83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52DC6F25-95C7-46D7-9BF5-5425DE737A83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52DC6F25-95C7-46D7-9BF5-5425DE737A83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52DC6F25-95C7-46D7-9BF5-5425DE737A83}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {27E0D337-0DFE-4306-BA6F-725B00BC2000}
+	EndGlobalSection
+EndGlobal

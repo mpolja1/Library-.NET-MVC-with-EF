@@ -1,0 +1,139 @@
+﻿@model IEnumerable<DAL.DBContext.Book>
+
+
+
+<h2>Knjige</h2>
+<head>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+
+</head>
+
+@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary",style="margin-bottom:10px;" })
+
+
+<table class="table table-responsive table-bordered" style="margin-top:10px;" id="tableBook">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                Title
+            </th>
+
+            <th>
+                <strong>Autor</strong>
+            </th>
+            <th>
+                Izdavac
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ISBN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuyPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BorrowPrice)
+            </th>
+
+            <th class="text-center" style="width:200px;">Akcija</th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr id="row_@item.BookId">
+            <td width="20%">
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Publisher.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.BuyPrice)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.BorrowPrice)
+            </td>
+
+            <td>
+                <a href="#" class="btn btn-danger" onclick="ConfirmDelete(@item.BookId)">Delete </a>
+                @Html.ActionLink("Edit", "Edit", new { id = item.BookId }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Hide", "Hide", new { id = item.BookId }, new { @class = "btn bg-warning", onclick="return confirm('Are you sure whant to hide book?');" })
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 class="modal-title">Delete Book</h3>
+            </div>
+            <div class="modal-body">
+                <h4>Are you sure you want to Remove this Book?</h4>
+
+                <div style="text-align:center; display:none" id="loaderDiv">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/28/InternetSlowdown_Day.gif#" width="100" alt="Alternate Text" />
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                <a href="#" class="btn btn-success" onclick="DeleteBook()">Confirm</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<input type="hidden" id="hiddenBookId" />
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#tableBook').DataTable();
+        });
+            var ConfirmDelete = function (BookId) {
+
+                $("#hiddenBookId").val(BookId);
+                $("#myModal").modal('show');
+
+        }
+       
+        
+            var DeleteBook = function () {
+
+                var idbook = $("#hiddenBookId").val();
+
+                $.ajax({
+
+                    type: "POST",
+                    url: "/Book/DeleteBook",
+                    data: { BookId: idbook },
+                    success: function (result) {
+                        
+                        $("#myModal").modal("hide");
+                        $("#row_" + idbook).remove();
+                        
+                    }
+       
+                })
+
+            }
+        
+        
+    </script>
+
+}
+
+

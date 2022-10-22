@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8b254104356444c3ac779b23f7ce35e9" Name="Diagram1">
+        <EntityTypeShape EntityType="KnjiznicaModel.Author" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KnjiznicaModel.Book" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KnjiznicaModel.Employee" Width="1.5" PointX="5.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KnjiznicaModel.Library" Width="1.5" PointX="7.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KnjiznicaModel.Publisher" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KnjiznicaModel.PurchasedHistory" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KnjiznicaModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KnjiznicaModel.UserAsp" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <AssociationConnector Association="KnjiznicaModel.FK_dbo_Books_dbo_Authors_AuthorId" ManuallyRouted="false" />
+        <AssociationConnector Association="KnjiznicaModel.FK__Book__PublisherI__2739D489" ManuallyRouted="false" />
+        <AssociationConnector Association="KnjiznicaModel.FK__Purchased__BookI__2CF2ADDF" ManuallyRouted="false" />
+        <AssociationConnector Association="KnjiznicaModel.FK__Purchased__UserI__2DE6D218" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="KnjiznicaModel.LoanHistory" Width="1.5" PointX="5.25" PointY="3.5" />
+        <AssociationConnector Association="KnjiznicaModel.FK__LoanHisto__BookI__30C33EC3" />
+        <AssociationConnector Association="KnjiznicaModel.FK__LoanHisto__UserI__31B762FC" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<DAL.DBContext.LoanHistory>
+
+@{
+    ViewBag.Title = "Loan";
+}
+
+<h2>Loan</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Borrowed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Returned)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.Book.Title)
+        </th>
+        <th>
+            Author
+        </th>
+        
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Borrowed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Returned)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.Book.Title)
+        </td>
+        <td>
+           @item.Book.Author.ToString()
+        </td>
+      
+    </tr>
+}
+
+</table>
